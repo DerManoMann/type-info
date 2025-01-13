@@ -24,10 +24,15 @@ use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
  */
 final class ReflectionParameterTypeResolver implements TypeResolverInterface
 {
+    private ReflectionTypeResolver $reflectionTypeResolver;
+    private TypeContextFactory $typeContextFactory;
+
     public function __construct(
-        private ReflectionTypeResolver $reflectionTypeResolver,
-        private TypeContextFactory $typeContextFactory,
+        ReflectionTypeResolver $reflectionTypeResolver,
+        TypeContextFactory $typeContextFactory
     ) {
+        $this->reflectionTypeResolver = $reflectionTypeResolver;
+        $this->typeContextFactory = $typeContextFactory;
     }
 
     public function resolve(mixed $subject, ?TypeContext $typeContext = null): Type
@@ -45,7 +50,7 @@ final class ReflectionParameterTypeResolver implements TypeResolverInterface
                 ? \sprintf('%s::%s($%s)', $typeContext->calledClassName, $subject->getDeclaringFunction()->getName(), $subject->getName())
                 : \sprintf('%s($%s)', $subject->getDeclaringFunction()->getName(), $subject->getName());
 
-            throw new UnsupportedException(\sprintf('Cannot resolve type for "%s".', $path), $subject, previous: $e);
+            throw new UnsupportedException(\sprintf('Cannot resolve type for "%s".', $path), $subject, 0, $e);
         }
     }
 }

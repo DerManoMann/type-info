@@ -25,14 +25,14 @@ use Radebatz\TypeInfo\TypeIdentifier;
  */
 final class ReflectionTypeResolver implements TypeResolverInterface
 {
-    public function resolve(mixed $subject, ?TypeContext $typeContext = null): Type
+    public function resolve($subject, ?TypeContext $typeContext = null): Type
     {
         if ($subject instanceof \ReflectionUnionType) {
-            return Type::union(...array_map(fn (mixed $t): Type => $this->resolve($t, $typeContext), $subject->getTypes()));
+            return Type::union(...array_map(fn ($t): Type => $this->resolve($t, $typeContext), $subject->getTypes()));
         }
 
         if ($subject instanceof \ReflectionIntersectionType) {
-            return Type::intersection(...array_map(fn (mixed $t): Type => $this->resolve($t, $typeContext), $subject->getTypes()));
+            return Type::intersection(...array_map(fn ($t): Type => $this->resolve($t, $typeContext), $subject->getTypes()));
         }
 
         if (!$subject instanceof \ReflectionNamedType) {

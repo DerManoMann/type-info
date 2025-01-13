@@ -38,7 +38,7 @@ trait TypeFactoryTrait
      *
      * @return BuiltinType<T>
      */
-    public static function builtin(TypeIdentifier|string $identifier): BuiltinType
+    public static function builtin($identifier): BuiltinType
     {
         /** @var T $identifier */
         $identifier = \is_string($identifier) ? TypeIdentifier::from($identifier) : $identifier;
@@ -149,7 +149,7 @@ trait TypeFactoryTrait
      *
      * @return CollectionType<T>
      */
-    public static function collection(BuiltinType|ObjectType|GenericType $type, ?Type $value = null, ?Type $key = null, bool $asList = false): CollectionType
+    public static function collection($type, ?Type $value = null, ?Type $key = null, bool $asList = false): CollectionType
     {
         if (!$type instanceof GenericType && (null !== $value || null !== $key)) {
             $type = self::generic($type, $key ?? self::union(self::int(), self::string()), $value ?? self::mixed());
@@ -179,7 +179,7 @@ trait TypeFactoryTrait
      */
     public static function list(?Type $value = null): CollectionType
     {
-        return self::array($value, self::int(), asList: true);
+        return self::array($value, self::int(), true);
     }
 
     /**
@@ -197,7 +197,7 @@ trait TypeFactoryTrait
      *
      * @return ($className is class-string ? ObjectType<T> : BuiltinType<TypeIdentifier::OBJECT>)
      */
-    public static function object(?string $className = null): BuiltinType|ObjectType
+    public static function object(?string $className = null)
     {
         return null !== $className ? new ObjectType($className) : new BuiltinType(TypeIdentifier::OBJECT);
     }
@@ -233,7 +233,7 @@ trait TypeFactoryTrait
      *
      * @return GenericType<T>
      */
-    public static function generic(BuiltinType|ObjectType $mainType, Type ...$variableTypes): GenericType
+    public static function generic($mainType, Type ...$variableTypes): GenericType
     {
         return new GenericType($mainType, ...$variableTypes);
     }

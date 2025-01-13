@@ -26,21 +26,24 @@ use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
  */
 final class TypeResolver implements TypeResolverInterface
 {
+    private ContainerInterface $resolvers;
+
     /**
      * @param ContainerInterface $resolvers Locator of type resolvers, keyed by supported subject type
      */
     public function __construct(
-        private ContainerInterface $resolvers,
+        ContainerInterface $resolvers
     ) {
+        $this->resolvers = $resolvers;
     }
 
-    public function resolve(mixed $subject, ?TypeContext $typeContext = null): Type
+    public function resolve($subject, ?TypeContext $typeContext = null): Type
     {
         $subjectType = match (\is_object($subject)) {
             true => match (true) {
-                is_subclass_of($subject::class, \ReflectionType::class) => \ReflectionType::class,
-                is_subclass_of($subject::class, \ReflectionFunctionAbstract::class) => \ReflectionFunctionAbstract::class,
-                default => $subject::class,
+                is_subclass_of(get_class($subject), \ReflectionType::class) => \ReflectionType::class,
+                is_subclass_of(get_class($subject), \ReflectionFunctionAbstract::class) => \ReflectionFunctionAbstract::class,
+                default => get_class($subject),
             },
             false => get_debug_type($subject),
         };
@@ -85,9 +88,12 @@ final class TypeResolver implements TypeResolverInterface
         }
 
         $resolversContainer = new class($resolvers) implements ContainerInterface {
+            private array $resolvers;
+
             public function __construct(
-                private array $resolvers,
+                array $resolvers
             ) {
+                $this->resolvers = $resolvers;
             }
 
             public function has(string $id): bool

@@ -13,6 +13,8 @@ namespace Radebatz\TypeInfo\TypeContext;
 
 use Radebatz\TypeInfo\Exception\LogicException;
 use Radebatz\TypeInfo\Type;
+use function count;
+use function sprintf;
 
 /**
  * Type resolving context.
@@ -30,17 +32,28 @@ final class TypeContext
      */
     private static array $classExistCache = [];
 
+    public string $calledClassName;
+    public string $declaringClassName;
+    public ?string $namespace = null;
+    public array $uses = [];
+    public array $templates = [];
+
     /**
      * @param array<string, string> $uses
      * @param array<string, Type>   $templates
      */
     public function __construct(
-        public string $calledClassName,
-        public string $declaringClassName,
-        public ?string $namespace = null,
-        public array $uses = [],
-        public array $templates = [],
+        string $calledClassName,
+        string $declaringClassName,
+        ?string $namespace = null,
+        array $uses = [],
+        array $templates = []
     ) {
+        $this->calledClassName = $calledClassName;
+        $this->declaringClassName = $declaringClassName;
+        $this->namespace = $namespace;
+        $this->uses = $uses;
+        $this->templates = $templates;
     }
 
     /**
@@ -55,16 +68,16 @@ final class TypeContext
         $nameParts = explode('\\', $name);
         $firstNamePart = $nameParts[0];
         if (isset($this->uses[$firstNamePart])) {
-            if (1 === \count($nameParts)) {
+            if (1 === count($nameParts)) {
                 return $this->uses[$firstNamePart];
             }
             array_shift($nameParts);
 
-            return \sprintf('%s\\%s', $this->uses[$firstNamePart], implode('\\', $nameParts));
+            return sprintf('%s\\%s', $this->uses[$firstNamePart], implode('\\', $nameParts));
         }
 
         if (null !== $this->namespace) {
-            return \sprintf('%s\\%s', $this->namespace, $name);
+            return sprintf('%s\\%s', $this->namespace, $name);
         }
 
         return $name;
@@ -94,7 +107,7 @@ final class TypeContext
         $declaringClassName = $this->getDeclaringClass();
 
         if (false === $parentClass = get_parent_class($declaringClassName)) {
-            throw new LogicException(\sprintf('"%s" do not extend any class.', $declaringClassName));
+            throw new LogicException(sprintf('"%s" do not extend any class.', $declaringClassName));
         }
 
         if (!isset(self::$classExistCache[$parentClass])) {
@@ -106,7 +119,7 @@ final class TypeContext
                 try {
                     new \ReflectionClass($parentClass);
                     self::$classExistCache[$parentClass] = true;
-                } catch (\Throwable) {
+                } catch (\Throwable $throwable) {
                 }
             }
         }

@@ -24,6 +24,7 @@ use Radebatz\TypeInfo\Exception\UnsupportedException;
 use Radebatz\TypeInfo\Type;
 use Radebatz\TypeInfo\TypeContext\TypeContext;
 use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
+use function sprintf;
 
 /**
  * Resolves type on reflection prioriziting PHP documentation.
@@ -35,33 +36,33 @@ final class PhpDocAwareReflectionTypeResolver implements TypeResolverInterface
     private PhpDocParser $phpDocParser;
     private Lexer $lexer;
 
+    private TypeResolverInterface $reflectionTypeResolver;
+    private TypeResolverInterface $stringTypeResolver;
+    private TypeContextFactory $typeContextFactory;
+
     public function __construct(
-        private TypeResolverInterface $reflectionTypeResolver,
-        private TypeResolverInterface $stringTypeResolver,
-        private TypeContextFactory $typeContextFactory,
+        TypeResolverInterface $reflectionTypeResolver,
+        TypeResolverInterface $stringTypeResolver,
+        TypeContextFactory $typeContextFactory,
         ?PhpDocParser $phpDocParser = null,
-        ?Lexer $lexer = null,
+        ?Lexer $lexer = null
     ) {
-        if (class_exists(ParserConfig::class)) {
-            $this->lexer = $lexer ?? new Lexer(new ParserConfig([]));
-            $this->phpDocParser = $phpDocParser ?? new PhpDocParser(
-                $config = new ParserConfig([]),
-                new TypeParser($config, $constExprParser = new ConstExprParser($config)),
-                $constExprParser,
-            );
-        } else {
-            $this->lexer = $lexer ?? new Lexer();
-            $this->phpDocParser = $phpDocParser ?? new PhpDocParser(
-                new TypeParser($constExprParser = new ConstExprParser()),
-                $constExprParser,
-            );
-        }
+        $this->reflectionTypeResolver = $reflectionTypeResolver;
+        $this->stringTypeResolver = $stringTypeResolver;
+        $this->typeContextFactory = $typeContextFactory;
+
+        $this->lexer = $lexer ?? new Lexer(new ParserConfig([]));
+        $this->phpDocParser = $phpDocParser ?? new PhpDocParser(
+            $config = new ParserConfig([]),
+            new TypeParser($config, $constExprParser = new ConstExprParser($config)),
+            $constExprParser,
+        );
     }
 
     public function resolve(mixed $subject, ?TypeContext $typeContext = null): Type
     {
         if (!$subject instanceof \ReflectionProperty && !$subject instanceof \ReflectionParameter && !$subject instanceof \ReflectionFunctionAbstract) {
-            throw new UnsupportedException(\sprintf('Expected subject to be a "ReflectionProperty", a "ReflectionParameter" or a "ReflectionFunctionAbstract", "%s" given.', get_debug_type($subject)), $subject);
+            throw new UnsupportedException(sprintf('Expected subject to be a "ReflectionProperty", a "ReflectionParameter" or a "ReflectionFunctionAbstract", "%s" given.', get_debug_type($subject)), $subject);
         }
 
         $docComment = match (true) {

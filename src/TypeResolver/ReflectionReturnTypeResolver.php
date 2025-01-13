@@ -15,6 +15,7 @@ use Radebatz\TypeInfo\Exception\UnsupportedException;
 use Radebatz\TypeInfo\Type;
 use Radebatz\TypeInfo\TypeContext\TypeContext;
 use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
+use function sprintf;
 
 /**
  * Resolves return type for a given function reflection.
@@ -24,16 +25,21 @@ use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
  */
 final class ReflectionReturnTypeResolver implements TypeResolverInterface
 {
+    private ReflectionTypeResolver $reflectionTypeResolver;
+    private TypeContextFactory $typeContextFactory;
+
     public function __construct(
-        private ReflectionTypeResolver $reflectionTypeResolver,
-        private TypeContextFactory $typeContextFactory,
+        ReflectionTypeResolver $reflectionTypeResolver,
+        TypeContextFactory $typeContextFactory
     ) {
+        $this->reflectionTypeResolver = $reflectionTypeResolver;
+        $this->typeContextFactory = $typeContextFactory;
     }
 
     public function resolve(mixed $subject, ?TypeContext $typeContext = null): Type
     {
         if (!$subject instanceof \ReflectionFunctionAbstract) {
-            throw new UnsupportedException(\sprintf('Expected subject to be a "ReflectionFunctionAbstract", "%s" given.', get_debug_type($subject)), $subject);
+            throw new UnsupportedException(sprintf('Expected subject to be a "ReflectionFunctionAbstract", "%s" given.', get_debug_type($subject)), $subject);
         }
 
         $typeContext ??= $this->typeContextFactory->createFromReflection($subject);
@@ -42,10 +48,10 @@ final class ReflectionReturnTypeResolver implements TypeResolverInterface
             return $this->reflectionTypeResolver->resolve($subject->getReturnType(), $typeContext);
         } catch (UnsupportedException $e) {
             $path = null !== $typeContext
-                ? \sprintf('%s::%s()', $typeContext->calledClassName, $subject->getName())
-                : \sprintf('%s()', $subject->getName());
+                ? sprintf('%s::%s()', $typeContext->calledClassName, $subject->getName())
+                : sprintf('%s()', $subject->getName());
 
-            throw new UnsupportedException(\sprintf('Cannot resolve type for "%s".', $path), $subject, previous: $e);
+            throw new UnsupportedException(sprintf('Cannot resolve type for "%s".', $path), $subject, previous: $e);
         }
     }
 }

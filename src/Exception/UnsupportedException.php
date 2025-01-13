@@ -17,12 +17,15 @@ namespace Radebatz\TypeInfo\Exception;
  */
 class UnsupportedException extends \LogicException implements ExceptionInterface
 {
+    public $subject;
+
     public function __construct(
         string $message,
-        public mixed $subject,
+        $subject,
         int $code = 0,
-        ?\Throwable $previous = null,
+        ?\Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
+        $this->subject = $subject;
     }
 }
