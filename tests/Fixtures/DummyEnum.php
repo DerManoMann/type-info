@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Component\TypeInfo\Tests\Fixtures;
+namespace Radebatz\TypeInfo\Tests\Fixtures;
 
 enum DummyEnum
 {

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\TypeResolver;
+namespace Radebatz\TypeInfo\TypeResolver;
 
 use PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode;
 use PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFalseNode;
@@ -35,14 +35,14 @@ use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
 use PHPStan\PhpDocParser\ParserConfig;
-use Symfony\Component\TypeInfo\Exception\InvalidArgumentException;
-use Symfony\Component\TypeInfo\Exception\UnsupportedException;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\Type\BuiltinType;
-use Symfony\Component\TypeInfo\Type\CollectionType;
-use Symfony\Component\TypeInfo\Type\GenericType;
-use Symfony\Component\TypeInfo\TypeContext\TypeContext;
-use Symfony\Component\TypeInfo\TypeIdentifier;
+use Radebatz\TypeInfo\Exception\InvalidArgumentException;
+use Radebatz\TypeInfo\Exception\UnsupportedException;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\Type\BuiltinType;
+use Radebatz\TypeInfo\Type\CollectionType;
+use Radebatz\TypeInfo\Type\GenericType;
+use Radebatz\TypeInfo\TypeContext\TypeContext;
+use Radebatz\TypeInfo\TypeIdentifier;
 
 /**
  * Resolves type for a given string.

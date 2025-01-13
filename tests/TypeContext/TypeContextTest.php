@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\TypeContext;
+namespace Radebatz\TypeInfo\Tests\TypeContext;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Exception\LogicException;
-use Symfony\Component\TypeInfo\Tests\Fixtures\AbstractDummy;
-use Symfony\Component\TypeInfo\Tests\Fixtures\Dummy;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyExtendingStdClass;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyWithUses;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\TypeContext\TypeContext;
-use Symfony\Component\TypeInfo\TypeContext\TypeContextFactory;
+use Radebatz\TypeInfo\Exception\LogicException;
+use Radebatz\TypeInfo\Tests\Fixtures\AbstractDummy;
+use Radebatz\TypeInfo\Tests\Fixtures\Dummy;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyExtendingStdClass;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyWithUses;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\TypeContext\TypeContext;
+use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
 
 class TypeContextTest extends TestCase
 {
@@ -30,7 +30,7 @@ class TypeContextTest extends TestCase
         $this->assertSame(DummyWithUses::class, $typeContext->normalize('DummyWithUses'));
         $this->assertSame(Type::class, $typeContext->normalize('Type'));
         $this->assertSame('\\' . \DateTimeImmutable::class, $typeContext->normalize('DateTime'));
-        $this->assertSame('Symfony\\Component\\TypeInfo\\Tests\\Fixtures\\unknown', $typeContext->normalize('unknown'));
+        $this->assertSame('Radebatz\\TypeInfo\\Tests\\Fixtures\\unknown', $typeContext->normalize('unknown'));
         $this->assertSame('unknown', $typeContext->normalize('\\unknown'));
 
         $typeContextWithoutNamespace = new TypeContext('Foo', 'Bar');

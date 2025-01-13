@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Type;
+namespace Radebatz\TypeInfo\Type;
 
-use Symfony\Component\TypeInfo\Exception\InvalidArgumentException;
-use Symfony\Component\TypeInfo\Type;
+use Radebatz\TypeInfo\Exception\InvalidArgumentException;
+use Radebatz\TypeInfo\Type;
 
 /**
  * @author Mathias Arlaud <mathias.arlaud@gmail.com>

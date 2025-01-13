@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\TypeResolver;
+namespace Radebatz\TypeInfo\Tests\TypeResolver;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Tests\Fixtures\Dummy;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyWithPhpDoc;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\TypeContext\TypeContextFactory;
-use Symfony\Component\TypeInfo\TypeResolver\PhpDocAwareReflectionTypeResolver;
-use Symfony\Component\TypeInfo\TypeResolver\StringTypeResolver;
-use Symfony\Component\TypeInfo\TypeResolver\TypeResolver;
+use Radebatz\TypeInfo\Tests\Fixtures\Dummy;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyWithPhpDoc;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
+use Radebatz\TypeInfo\TypeResolver\PhpDocAwareReflectionTypeResolver;
+use Radebatz\TypeInfo\TypeResolver\StringTypeResolver;
+use Radebatz\TypeInfo\TypeResolver\TypeResolver;
 
 class PhpDocAwareReflectionTypeResolverTest extends TestCase
 {

@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\TypeResolver;
+namespace Radebatz\TypeInfo\Tests\TypeResolver;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Exception\UnsupportedException;
-use Symfony\Component\TypeInfo\Tests\Fixtures\ReflectionExtractableDummy;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\TypeContext\TypeContextFactory;
-use Symfony\Component\TypeInfo\TypeResolver\ReflectionParameterTypeResolver;
-use Symfony\Component\TypeInfo\TypeResolver\ReflectionTypeResolver;
+use Radebatz\TypeInfo\Exception\UnsupportedException;
+use Radebatz\TypeInfo\Tests\Fixtures\ReflectionExtractableDummy;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
+use Radebatz\TypeInfo\TypeResolver\ReflectionParameterTypeResolver;
+use Radebatz\TypeInfo\TypeResolver\ReflectionTypeResolver;
 
 class ReflectionParameterTypeResolverTest extends TestCase
 {

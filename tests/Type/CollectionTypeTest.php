@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\Type;
+namespace Radebatz\TypeInfo\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Exception\InvalidArgumentException;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\Type\CollectionType;
-use Symfony\Component\TypeInfo\Type\GenericType;
-use Symfony\Component\TypeInfo\TypeIdentifier;
+use Radebatz\TypeInfo\Exception\InvalidArgumentException;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\Type\CollectionType;
+use Radebatz\TypeInfo\Type\GenericType;
+use Radebatz\TypeInfo\TypeIdentifier;
 
 class CollectionTypeTest extends TestCase
 {

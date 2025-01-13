@@ -1,8 +1,8 @@
 <?php
 
-namespace Symfony\Component\TypeInfo\Tests\Fixtures;
+namespace Radebatz\TypeInfo\Tests\Fixtures;
 
-use Symfony\Component\TypeInfo\Type;
+use Radebatz\TypeInfo\Type;
 use \DateTimeImmutable as DateTime;
 
 final class DummyWithUses

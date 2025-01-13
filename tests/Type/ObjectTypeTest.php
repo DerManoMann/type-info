@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\Type;
+namespace Radebatz\TypeInfo\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Type\ObjectType;
-use Symfony\Component\TypeInfo\TypeIdentifier;
+use Radebatz\TypeInfo\Type\ObjectType;
+use Radebatz\TypeInfo\TypeIdentifier;
 
 class ObjectTypeTest extends TestCase
 {

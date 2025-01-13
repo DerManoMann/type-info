@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\TypeResolver;
+namespace Radebatz\TypeInfo\Tests\TypeResolver;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Exception\UnsupportedException;
-use Symfony\Component\TypeInfo\Tests\Fixtures\Dummy;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\TypeResolver\TypeResolver;
-use Symfony\Component\TypeInfo\TypeResolver\TypeResolverInterface;
+use Radebatz\TypeInfo\Exception\UnsupportedException;
+use Radebatz\TypeInfo\Tests\Fixtures\Dummy;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\TypeResolver\TypeResolver;
+use Radebatz\TypeInfo\TypeResolver\TypeResolverInterface;
 
 class TypeResolverTest extends TestCase
 {

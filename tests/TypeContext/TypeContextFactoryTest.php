@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\TypeContext;
+namespace Radebatz\TypeInfo\Tests\TypeContext;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Tests\Fixtures\AbstractDummy;
-use Symfony\Component\TypeInfo\Tests\Fixtures\Dummy;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyWithTemplates;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyWithUses;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\TypeContext\TypeContextFactory;
-use Symfony\Component\TypeInfo\TypeResolver\StringTypeResolver;
+use Radebatz\TypeInfo\Tests\Fixtures\AbstractDummy;
+use Radebatz\TypeInfo\Tests\Fixtures\Dummy;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyWithTemplates;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyWithUses;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
+use Radebatz\TypeInfo\TypeResolver\StringTypeResolver;
 
 class TypeContextFactoryTest extends TestCase
 {
@@ -54,7 +54,7 @@ class TypeContextFactoryTest extends TestCase
 
     public function testCollectNamespace()
     {
-        $namespace = 'Symfony\\Component\\TypeInfo\\Tests\\Fixtures';
+        $namespace = 'Radebatz\\TypeInfo\\Tests\\Fixtures';
 
         $this->assertSame($namespace, $this->typeContextFactory->createFromClassName(Dummy::class)->namespace);
 
@@ -70,7 +70,7 @@ class TypeContextFactoryTest extends TestCase
 
         $uses = [
             'Type' => Type::class,
-            // \DateTimeInterface::class => '\\' . \DateTimeInterface::class,
+            // TODO: \DateTimeInterface::class => '\\' . \DateTimeInterface::class,
             'DateTime' => '\\' . \DateTimeImmutable::class,
         ];
 

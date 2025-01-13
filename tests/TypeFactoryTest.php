@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests;
+namespace Radebatz\TypeInfo\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyBackedEnum;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyEnum;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\Type\BackedEnumType;
-use Symfony\Component\TypeInfo\Type\BuiltinType;
-use Symfony\Component\TypeInfo\Type\CollectionType;
-use Symfony\Component\TypeInfo\Type\EnumType;
-use Symfony\Component\TypeInfo\Type\GenericType;
-use Symfony\Component\TypeInfo\Type\IntersectionType;
-use Symfony\Component\TypeInfo\Type\NullableType;
-use Symfony\Component\TypeInfo\Type\ObjectType;
-use Symfony\Component\TypeInfo\Type\TemplateType;
-use Symfony\Component\TypeInfo\Type\UnionType;
-use Symfony\Component\TypeInfo\TypeIdentifier;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyBackedEnum;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyEnum;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\Type\BackedEnumType;
+use Radebatz\TypeInfo\Type\BuiltinType;
+use Radebatz\TypeInfo\Type\CollectionType;
+use Radebatz\TypeInfo\Type\EnumType;
+use Radebatz\TypeInfo\Type\GenericType;
+use Radebatz\TypeInfo\Type\IntersectionType;
+use Radebatz\TypeInfo\Type\NullableType;
+use Radebatz\TypeInfo\Type\ObjectType;
+use Radebatz\TypeInfo\Type\TemplateType;
+use Radebatz\TypeInfo\Type\UnionType;
+use Radebatz\TypeInfo\TypeIdentifier;
 
 class TypeFactoryTest extends TestCase
 {

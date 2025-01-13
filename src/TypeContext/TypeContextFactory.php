@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\TypeContext;
+namespace Radebatz\TypeInfo\TypeContext;
 
 use PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode;
 use PHPStan\PhpDocParser\Lexer\Lexer;
@@ -18,10 +18,10 @@ use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
 use PHPStan\PhpDocParser\ParserConfig;
-use Symfony\Component\TypeInfo\Exception\RuntimeException;
-use Symfony\Component\TypeInfo\Exception\UnsupportedException;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\TypeResolver\StringTypeResolver;
+use Radebatz\TypeInfo\Exception\RuntimeException;
+use Radebatz\TypeInfo\Exception\UnsupportedException;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\TypeResolver\StringTypeResolver;
 
 /**
  * Creates a type resolving context.

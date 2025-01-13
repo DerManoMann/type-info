@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo;
+namespace Radebatz\TypeInfo;
 
 /**
  * Identifier of a PHP native type.

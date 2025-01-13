@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\Type;
+namespace Radebatz\TypeInfo\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Exception\InvalidArgumentException;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\Type\IntersectionType;
-use Symfony\Component\TypeInfo\Type\ObjectType;
-use Symfony\Component\TypeInfo\Type\UnionType;
+use Radebatz\TypeInfo\Exception\InvalidArgumentException;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\Type\IntersectionType;
+use Radebatz\TypeInfo\Type\ObjectType;
+use Radebatz\TypeInfo\Type\UnionType;
 
 class IntersectionTypeTest extends TestCase
 {

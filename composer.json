@@ -73,12 +73,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Symfony\\Component\\TypeInfo\\": "src"
+      "Radebatz\\TypeInfo\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Symfony\\Component\\TypeInfo\\Tests\\": "tests"
+      "Radebatz\\TypeInfo\\Tests\\": "tests"
     }
   }
 }

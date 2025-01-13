@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Type;
+namespace Radebatz\TypeInfo\Type;
 
 /**
  * @author Mathias Arlaud <mathias.arlaud@gmail.com>

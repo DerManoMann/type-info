@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Type;
+namespace Radebatz\TypeInfo\Type;
 
-use Symfony\Component\TypeInfo\Type;
+use Radebatz\TypeInfo\Type;
 
 /**
  * Represents a template placeholder, such as "T" in "Collection<T>".

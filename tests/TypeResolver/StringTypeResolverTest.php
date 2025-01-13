@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\TypeResolver;
+namespace Radebatz\TypeInfo\Tests\TypeResolver;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Exception\InvalidArgumentException;
-use Symfony\Component\TypeInfo\Exception\UnsupportedException;
-use Symfony\Component\TypeInfo\Tests\Fixtures\AbstractDummy;
-use Symfony\Component\TypeInfo\Tests\Fixtures\Dummy;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyBackedEnum;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyCollection;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyEnum;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyWithTemplates;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\TypeContext\TypeContext;
-use Symfony\Component\TypeInfo\TypeContext\TypeContextFactory;
-use Symfony\Component\TypeInfo\TypeResolver\StringTypeResolver;
+use Radebatz\TypeInfo\Exception\InvalidArgumentException;
+use Radebatz\TypeInfo\Exception\UnsupportedException;
+use Radebatz\TypeInfo\Tests\Fixtures\AbstractDummy;
+use Radebatz\TypeInfo\Tests\Fixtures\Dummy;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyBackedEnum;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyCollection;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyEnum;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyWithTemplates;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\TypeContext\TypeContext;
+use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
+use Radebatz\TypeInfo\TypeResolver\StringTypeResolver;
 
 class StringTypeResolverTest extends TestCase
 {

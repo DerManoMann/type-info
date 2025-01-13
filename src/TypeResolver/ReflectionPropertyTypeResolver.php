@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\TypeResolver;
+namespace Radebatz\TypeInfo\TypeResolver;
 
-use Symfony\Component\TypeInfo\Exception\UnsupportedException;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\TypeContext\TypeContext;
-use Symfony\Component\TypeInfo\TypeContext\TypeContextFactory;
+use Radebatz\TypeInfo\Exception\UnsupportedException;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\TypeContext\TypeContext;
+use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
 
 /**
  * Resolves type for a given property reflection.

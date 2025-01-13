@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\Type;
+namespace Radebatz\TypeInfo\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyEnum;
-use Symfony\Component\TypeInfo\Type\EnumType;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyEnum;
+use Radebatz\TypeInfo\Type\EnumType;
 
 class EnumTypeTest extends TestCase
 {

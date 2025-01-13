@@ -13,7 +13,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="Symfony TypeInfo Component Test Suite">
+        <testsuite name="Radebatz TypeInfo Component Test Suite">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo;
+namespace Radebatz\TypeInfo;
 
-use Symfony\Component\TypeInfo\Type\CompositeTypeInterface;
-use Symfony\Component\TypeInfo\Type\WrappingTypeInterface;
+use Radebatz\TypeInfo\Type\CompositeTypeInterface;
+use Radebatz\TypeInfo\Type\WrappingTypeInterface;
 
 /**
  * @author Mathias Arlaud <mathias.arlaud@gmail.com>

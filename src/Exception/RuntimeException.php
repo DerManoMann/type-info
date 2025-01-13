@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Exception;
+namespace Radebatz\TypeInfo\Exception;
 
 /**
  * @author Mathias Arlaud <mathias.arlaud@gmail.com>

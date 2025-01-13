@@ -1,22 +1,24 @@
 TypeInfo Component
 ==================
 
+**This is a fork of the [Symfony TypeInfo](https://symfony.com/doc/current/components/type_info.html) component.** 
+
 The TypeInfo component extracts PHP types information.
 
 Getting Started
 ---------------
 
 ```bash
-composer require symfony/type-info
+composer require radebatz/type-info
 composer require phpstan/phpdoc-parser # to support raw string resolving
 ```
 
 ```php
 <?php
 
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\TypeIdentifier;
-use Symfony\Component\TypeInfo\TypeResolver\TypeResolver;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\TypeIdentifier;
+use Radebatz\TypeInfo\TypeResolver\TypeResolver;
 
 // Instantiate a new resolver
 $typeResolver = TypeResolver::create();

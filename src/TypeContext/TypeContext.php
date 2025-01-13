@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\TypeContext;
+namespace Radebatz\TypeInfo\TypeContext;
 
-use Symfony\Component\TypeInfo\Exception\LogicException;
-use Symfony\Component\TypeInfo\Type;
+use Radebatz\TypeInfo\Exception\LogicException;
+use Radebatz\TypeInfo\Type;
 
 /**
  * Type resolving context.

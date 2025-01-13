@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\TypeInfo\Tests\Type;
+namespace Radebatz\TypeInfo\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\TypeInfo\Exception\InvalidArgumentException;
-use Symfony\Component\TypeInfo\Tests\Fixtures\DummyBackedEnum;
-use Symfony\Component\TypeInfo\Type;
-use Symfony\Component\TypeInfo\Type\BackedEnumType;
+use Radebatz\TypeInfo\Exception\InvalidArgumentException;
+use Radebatz\TypeInfo\Tests\Fixtures\DummyBackedEnum;
+use Radebatz\TypeInfo\Type;
+use Radebatz\TypeInfo\Type\BackedEnumType;
 
 class BackedEnumTypeTest extends TestCase
 {
