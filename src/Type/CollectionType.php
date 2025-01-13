@@ -28,12 +28,21 @@ use Radebatz\TypeInfo\TypeIdentifier;
 final class CollectionType extends Type implements WrappingTypeInterface
 {
     /**
+     * @var BuiltinType|ObjectType|GenericType
+     */
+    private $type;
+    private bool $isList = false;
+
+    /**
      * @param T $type
      */
     public function __construct(
-        private BuiltinType|ObjectType|GenericType $type,
-        private bool $isList = false,
+        $type,
+        bool $isList = false
     ) {
+        $this->type = $type;
+        $this->isList = $isList;
+
         if ($type instanceof BuiltinType && TypeIdentifier::ARRAY !== $type->getTypeIdentifier() && TypeIdentifier::ITERABLE !== $type->getTypeIdentifier()) {
             throw new InvalidArgumentException(\sprintf('Cannot create "%s" with "%s" type.', self::class, $type));
         }

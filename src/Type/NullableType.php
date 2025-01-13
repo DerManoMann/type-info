@@ -26,12 +26,16 @@ use Radebatz\TypeInfo\TypeIdentifier;
  */
 final class NullableType extends UnionType implements WrappingTypeInterface
 {
+    private Type $type;
+
     /**
      * @param T $type
      */
     public function __construct(
-        private Type $type,
+        Type $type
     ) {
+        $this->type = $type;
+
         if ($type->isNullable()) {
             throw new InvalidArgumentException(\sprintf('Cannot create a "%s" with "%s" because it is already nullable.', self::class, $type));
         }

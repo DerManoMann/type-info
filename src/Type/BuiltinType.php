@@ -22,12 +22,15 @@ use Radebatz\TypeInfo\TypeIdentifier;
  */
 final class BuiltinType extends Type
 {
+    private TypeIdentifier $typeIdentifier;
+
     /**
      * @param T $typeIdentifier
      */
     public function __construct(
-        private TypeIdentifier $typeIdentifier,
+        TypeIdentifier $typeIdentifier
     ) {
+        $this->typeIdentifier = $typeIdentifier;
     }
 
     /**
@@ -38,13 +41,16 @@ final class BuiltinType extends Type
         return $this->typeIdentifier;
     }
 
-    public function isIdentifiedBy(TypeIdentifier|string ...$identifiers): bool
+    /**
+     * @param TypeIdentifier|string $identifiers
+     */
+    public function isIdentifiedBy(...$identifiers): bool
     {
         foreach ($identifiers as $identifier) {
             if (\is_string($identifier)) {
                 try {
                     $identifier = TypeIdentifier::from($identifier);
-                } catch (\ValueError) {
+                } catch (\ValueError $error) {
                     continue;
                 }
             }

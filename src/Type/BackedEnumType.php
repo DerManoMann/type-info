@@ -25,19 +25,22 @@ use Radebatz\TypeInfo\TypeIdentifier;
  */
 final class BackedEnumType extends EnumType
 {
+    private BuiltinType $backingType;
+
     /**
      * @param T $className
      * @param U $backingType
      */
     public function __construct(
         string $className,
-        private BuiltinType $backingType,
+        BuiltinType $backingType
     ) {
         if (TypeIdentifier::INT !== $backingType->getTypeIdentifier() && TypeIdentifier::STRING !== $backingType->getTypeIdentifier()) {
             throw new InvalidArgumentException(\sprintf('Cannot create "%s" with "%s" backing type.', self::class, $backingType));
         }
 
         parent::__construct($className);
+        $this->backingType = $backingType;
     }
 
     /**

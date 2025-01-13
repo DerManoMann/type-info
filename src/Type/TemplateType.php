@@ -25,13 +25,18 @@ use Radebatz\TypeInfo\Type;
  */
 final class TemplateType extends Type implements WrappingTypeInterface
 {
+    private string $name;
+    private Type $bound;
+
     /**
      * @param T $bound
      */
     public function __construct(
-        private string $name,
-        private Type $bound,
+        string $name,
+        Type $bound
     ) {
+        $this->name = $name;
+        $this->bound = $bound;
     }
 
     public function getName(): string

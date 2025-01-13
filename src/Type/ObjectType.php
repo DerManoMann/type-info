@@ -22,12 +22,15 @@ use Radebatz\TypeInfo\TypeIdentifier;
  */
 class ObjectType extends Type
 {
+    private string $className;
+
     /**
      * @param T $className
      */
     public function __construct(
-        private string $className,
+        string $className
     ) {
+        $this->className = $className;
     }
 
     public function getTypeIdentifier(): TypeIdentifier
@@ -43,7 +46,10 @@ class ObjectType extends Type
         return $this->className;
     }
 
-    public function isIdentifiedBy(TypeIdentifier|string ...$identifiers): bool
+    /**
+     * @param TypeIdentifier|string $identifiers
+     */
+    public function isIdentifiedBy(...$identifiers): bool
     {
         foreach ($identifiers as $identifier) {
             if ($identifier instanceof TypeIdentifier) {
@@ -58,7 +64,7 @@ class ObjectType extends Type
                 return true;
             }
 
-            if (is_a($this->className, $identifier, allow_string: true)) {
+            if (is_a($this->className, $identifier, true)) {
                 return true;
             }
         }

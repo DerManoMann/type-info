@@ -31,14 +31,20 @@ final class GenericType extends Type implements WrappingTypeInterface
      * @var list<Type>
      */
     private array $variableTypes;
+    /**
+     * @var BuiltinType|ObjectType
+     */
+    private $type;
 
     /**
      * @param T $type
      */
     public function __construct(
-        private BuiltinType|ObjectType $type,
-        Type ...$variableTypes,
+        $type,
+        Type ...$variableTypes
     ) {
+        $this->type = $type;
+
         if ($type instanceof BuiltinType && TypeIdentifier::ARRAY !== $type->getTypeIdentifier() && TypeIdentifier::ITERABLE !== $type->getTypeIdentifier()) {
             throw new InvalidArgumentException(\sprintf('Cannot create "%s" with "%s" type.', self::class, $type));
         }
