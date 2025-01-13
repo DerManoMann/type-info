@@ -34,8 +34,10 @@ abstract class Type implements \Stringable
 
     /**
      * Tells if the type (or one of its wrapped/composed parts) is identified by one of the $identifiers.
+     *
+     * @param TypeIdentifier|string $identifiers
      */
-    public function isIdentifiedBy(TypeIdentifier|string ...$identifiers): bool
+    public function isIdentifiedBy(...$identifiers): bool
     {
         $specification = static function (Type $type) use (&$specification, $identifiers): bool {
             if ($type instanceof WrappingTypeInterface) {

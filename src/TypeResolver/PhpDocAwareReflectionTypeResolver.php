@@ -59,7 +59,7 @@ final class PhpDocAwareReflectionTypeResolver implements TypeResolverInterface
         );
     }
 
-    public function resolve(mixed $subject, ?TypeContext $typeContext = null): Type
+    public function resolve($subject, ?TypeContext $typeContext = null): Type
     {
         if (!$subject instanceof \ReflectionProperty && !$subject instanceof \ReflectionParameter && !$subject instanceof \ReflectionFunctionAbstract) {
             throw new UnsupportedException(sprintf('Expected subject to be a "ReflectionProperty", a "ReflectionParameter" or a "ReflectionFunctionAbstract", "%s" given.', get_debug_type($subject)), $subject);

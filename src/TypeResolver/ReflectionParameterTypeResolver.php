@@ -35,7 +35,7 @@ final class ReflectionParameterTypeResolver implements TypeResolverInterface
         $this->typeContextFactory = $typeContextFactory;
     }
 
-    public function resolve(mixed $subject, ?TypeContext $typeContext = null): Type
+    public function resolve($subject, ?TypeContext $typeContext = null): Type
     {
         if (!$subject instanceof \ReflectionParameter) {
             throw new UnsupportedException(\sprintf('Expected subject to be a "ReflectionParameter", "%s" given.', get_debug_type($subject)), $subject);

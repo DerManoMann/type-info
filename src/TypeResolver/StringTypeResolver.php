@@ -116,7 +116,7 @@ final class StringTypeResolver implements TypeResolverInterface
         }
 
         if ($node instanceof ConstTypeNode) {
-            return match ($node->constExpr::class) {
+            return match (get_class($node->constExpr)) {
                 ConstExprArrayNode::class => Type::array(),
                 ConstExprFalseNode::class => Type::false(),
                 ConstExprFloatNode::class => Type::float(),
@@ -256,7 +256,7 @@ final class StringTypeResolver implements TypeResolverInterface
                 try {
                     new \ReflectionClass($className);
                     self::$classExistCache[$className] = true;
-                } catch (\Throwable) {
+                } catch (\Throwable $throwable) {
                 }
             }
         }

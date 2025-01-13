@@ -38,10 +38,12 @@ final class TypeContextFactory
 
     private ?Lexer $phpstanLexer = null;
     private ?PhpDocParser $phpstanParser = null;
+    private ?StringTypeResolver $stringTypeResolver = null;
 
     public function __construct(
-        private ?StringTypeResolver $stringTypeResolver = null,
+        ?StringTypeResolver $stringTypeResolver = null
     ) {
+        $this->stringTypeResolver = $stringTypeResolver;
     }
 
     public function createFromClassName(string $calledClassName, ?string $declaringClassName = null): TypeContext
@@ -144,9 +146,10 @@ final class TypeContextFactory
     }
 
     /**
+     * @param  \ReflectionClass|\ReflectionFunctionAbstract $reflection
      * @return array<string, Type>
      */
-    private function collectTemplates(\ReflectionClass|\ReflectionFunctionAbstract $reflection, TypeContext $typeContext): array
+    private function collectTemplates($reflection, TypeContext $typeContext): array
     {
         if (!$this->stringTypeResolver || !class_exists(PhpDocParser::class)) {
             return [];
@@ -180,7 +183,7 @@ final class TypeContextFactory
                 if (null !== $typeString) {
                     $type = $this->stringTypeResolver->resolve($typeString, $typeContext);
                 }
-            } catch (UnsupportedException) {
+            } catch (UnsupportedException $exception) {
             }
 
             $templates[$tag->value->name] = $type;

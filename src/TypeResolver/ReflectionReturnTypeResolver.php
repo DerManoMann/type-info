@@ -36,7 +36,7 @@ final class ReflectionReturnTypeResolver implements TypeResolverInterface
         $this->typeContextFactory = $typeContextFactory;
     }
 
-    public function resolve(mixed $subject, ?TypeContext $typeContext = null): Type
+    public function resolve($subject, ?TypeContext $typeContext = null): Type
     {
         if (!$subject instanceof \ReflectionFunctionAbstract) {
             throw new UnsupportedException(sprintf('Expected subject to be a "ReflectionFunctionAbstract", "%s" given.', get_debug_type($subject)), $subject);
@@ -51,7 +51,7 @@ final class ReflectionReturnTypeResolver implements TypeResolverInterface
                 ? sprintf('%s::%s()', $typeContext->calledClassName, $subject->getName())
                 : sprintf('%s()', $subject->getName());
 
-            throw new UnsupportedException(sprintf('Cannot resolve type for "%s".', $path), $subject, previous: $e);
+            throw new UnsupportedException(sprintf('Cannot resolve type for "%s".', $path), $subject, 0, $e);
         }
     }
 }
