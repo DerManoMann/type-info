@@ -65,11 +65,14 @@ final class PhpDocAwareReflectionTypeResolver implements TypeResolverInterface
             throw new UnsupportedException(sprintf('Expected subject to be a "ReflectionProperty", a "ReflectionParameter" or a "ReflectionFunctionAbstract", "%s" given.', get_debug_type($subject)), $subject);
         }
 
-        $docComment = match (true) {
-            $subject instanceof \ReflectionProperty => $subject->getDocComment(),
-            $subject instanceof \ReflectionParameter => $subject->getDeclaringFunction()->getDocComment(),
-            $subject instanceof \ReflectionFunctionAbstract => $subject->getDocComment(),
-        };
+        switch (true) {
+            case $subject instanceof \ReflectionProperty: $docComment =  $subject->getDocComment();
+                break;
+            case $subject instanceof \ReflectionParameter: $docComment =  $subject->getDeclaringFunction()->getDocComment();
+                break;
+            case $subject instanceof \ReflectionFunctionAbstract: $docComment =  $subject->getDocComment();
+                break;
+        }
 
         if (!$docComment) {
             return $this->reflectionTypeResolver->resolve($subject);
@@ -77,10 +80,13 @@ final class PhpDocAwareReflectionTypeResolver implements TypeResolverInterface
 
         $typeContext ??= $this->typeContextFactory->createFromReflection($subject);
 
-        $tagName = match (true) {
-            $subject instanceof \ReflectionProperty => '@var',
-            $subject instanceof \ReflectionParameter => '@param',
-            $subject instanceof \ReflectionFunctionAbstract => '@return',
+        switch (true) {
+            case $subject instanceof \ReflectionProperty: $tagName =  '@var';
+                break;
+            case $subject instanceof \ReflectionParameter: $tagName =  '@param';
+                break;
+            case $subject instanceof \ReflectionFunctionAbstract: $tagName =  '@return';
+                break;
         };
 
         $tokens = new TokenIterator($this->lexer->tokenize($docComment));

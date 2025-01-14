@@ -17,6 +17,9 @@ namespace Radebatz\TypeInfo\Exception;
  */
 class UnsupportedException extends \LogicException implements ExceptionInterface
 {
+    /**
+     * @var mixed
+     */
     public $subject;
 
     public function __construct(

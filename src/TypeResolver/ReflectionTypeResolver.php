@@ -68,13 +68,17 @@ final class ReflectionTypeResolver implements TypeResolverInterface
             throw new InvalidArgumentException(\sprintf('A "%s" must be provided to resolve "%s".', TypeContext::class, strtolower($identifier)));
         }
 
-        /** @var class-string $className */
-        $className = match (true) {
-            'self' === strtolower($identifier) => $typeContext->getDeclaringClass(),
-            'static' === strtolower($identifier) => $typeContext->getCalledClass(),
-            'parent' === strtolower($identifier) => $typeContext->getParentClass(),
-            default => $identifier,
-        };
+        /* @var class-string $className */
+        switch (true) {
+            case 'self' === strtolower($identifier): $className =  $typeContext->getDeclaringClass();
+                break;
+            case 'static' === strtolower($identifier): $className =  $typeContext->getCalledClass();
+                break;
+            case 'parent' === strtolower($identifier): $className =  $typeContext->getParentClass();
+                break;
+            default: $className =  $identifier;
+                break;
+        }
 
         if (is_subclass_of($className, \UnitEnum::class)) {
             $type = Type::enum($className);

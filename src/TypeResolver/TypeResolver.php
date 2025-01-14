@@ -39,13 +39,19 @@ final class TypeResolver implements TypeResolverInterface
 
     public function resolve($subject, ?TypeContext $typeContext = null): Type
     {
-        $subjectType = match (\is_object($subject)) {
-            true => match (true) {
-                is_subclass_of(get_class($subject), \ReflectionType::class) => \ReflectionType::class,
-                is_subclass_of(get_class($subject), \ReflectionFunctionAbstract::class) => \ReflectionFunctionAbstract::class,
-                default => get_class($subject),
-            },
-            false => get_debug_type($subject),
+        switch (\is_object($subject)) {
+            case true:
+                switch (true) {
+                    case is_subclass_of(get_class($subject), \ReflectionType::class): $subjectType = \ReflectionType::class;
+                        break;
+                    case is_subclass_of(get_class($subject), \ReflectionFunctionAbstract::class): $subjectType = \ReflectionFunctionAbstract::class;
+                        break;
+                    default: $subjectType = get_class($subject);
+                        break;
+                }
+                break;
+            case false: $subjectType = get_debug_type($subject);
+                break;
         };
 
         if (!$this->resolvers->has($subjectType)) {

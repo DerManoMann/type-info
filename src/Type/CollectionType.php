@@ -71,11 +71,11 @@ final class CollectionType extends Type implements WrappingTypeInterface
         $defaultCollectionKeyType = self::union(self::int(), self::string());
 
         if ($this->type instanceof GenericType) {
-            return match (\count($this->type->getVariableTypes())) {
-                2 => $this->type->getVariableTypes()[0],
-                1 => self::int(),
-                default => $defaultCollectionKeyType,
-            };
+            switch (\count($this->type->getVariableTypes())) {
+                case 2: return $this->type->getVariableTypes()[0];
+                case 1: return self::int();
+                default: return $defaultCollectionKeyType;
+            }
         }
 
         return $defaultCollectionKeyType;
@@ -86,11 +86,11 @@ final class CollectionType extends Type implements WrappingTypeInterface
         $defaultCollectionValueType = self::mixed();
 
         if ($this->type instanceof GenericType) {
-            return match (\count($this->type->getVariableTypes())) {
-                2 => $this->type->getVariableTypes()[1],
-                1 => $this->type->getVariableTypes()[0],
-                default => $defaultCollectionValueType,
-            };
+            switch (\count($this->type->getVariableTypes())) {
+                case 2: return $this->type->getVariableTypes()[1];
+                case 1: return $this->type->getVariableTypes()[0];
+                default: return $defaultCollectionValueType;
+            }
         }
 
         return $defaultCollectionValueType;

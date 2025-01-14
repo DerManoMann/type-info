@@ -180,14 +180,9 @@ final class TypeContextFactory
             return [];
         }
 
-        if (class_exists(ParserConfig::class)) {
-            $config = new ParserConfig([]);
-            $this->phpstanLexer ??= new Lexer($config);
-            $this->phpstanParser ??= new PhpDocParser($config, new TypeParser($config, new ConstExprParser($config)), new ConstExprParser($config));
-        } else {
-            $this->phpstanLexer ??= new Lexer();
-            $this->phpstanParser ??= new PhpDocParser(new TypeParser(new ConstExprParser()), new ConstExprParser());
-        }
+        $config = new ParserConfig([]);
+        $this->phpstanLexer ??= new Lexer($config);
+        $this->phpstanParser ??= new PhpDocParser($config, new TypeParser($config, new ConstExprParser($config)), new ConstExprParser($config));
 
         $tokens = new TokenIterator($this->phpstanLexer->tokenize($rawDocNode));
 
