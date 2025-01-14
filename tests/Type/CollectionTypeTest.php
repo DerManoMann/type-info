@@ -28,11 +28,11 @@ class CollectionTypeTest extends TestCase
 
     public function testCanOnlyConstructListWithIntKeyType()
     {
-        new CollectionType(Type::generic(Type::builtin(TypeIdentifier::ARRAY), Type::int(), Type::bool()), isList: true);
+        new CollectionType(Type::generic(Type::builtin(TypeIdentifier::ARRAY), Type::int(), Type::bool()), true);
         $this->addToAssertionCount(1);
 
         $this->expectException(InvalidArgumentException::class);
-        new CollectionType(Type::generic(Type::builtin(TypeIdentifier::ARRAY), Type::string(), Type::bool()), isList: true);
+        new CollectionType(Type::generic(Type::builtin(TypeIdentifier::ARRAY), Type::string(), Type::bool()), true);
     }
 
     public function testIsList()
@@ -40,7 +40,7 @@ class CollectionTypeTest extends TestCase
         $type = new CollectionType(Type::generic(Type::builtin(TypeIdentifier::ARRAY), Type::bool()));
         $this->assertFalse($type->isList());
 
-        $type = new CollectionType(Type::generic(Type::builtin(TypeIdentifier::ARRAY), Type::bool()), isList: true);
+        $type = new CollectionType(Type::generic(Type::builtin(TypeIdentifier::ARRAY), Type::bool()), true);
         $this->assertTrue($type->isList());
     }
 

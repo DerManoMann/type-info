@@ -49,7 +49,7 @@ class UnionType extends Type implements CompositeTypeInterface
                     throw new InvalidArgumentException(\sprintf('Cannot create union with "null", please use "%s" instead.', NullableType::class));
                 }
 
-                if ($type->getTypeIdentifier()->isStandalone()) {
+                if (TypeIdentifier::isStandalone($type->getTypeIdentifier())) {
                     throw new InvalidArgumentException(\sprintf('Cannot create union with "%s" standalone type.', $type));
                 }
             }
@@ -59,7 +59,7 @@ class UnionType extends Type implements CompositeTypeInterface
         $this->types = array_values(array_unique($types));
 
         $builtinTypesIdentifiers = array_map(
-            fn (BuiltinType $t): TypeIdentifier => $t->getTypeIdentifier(),
+            fn (BuiltinType $t): string => $t->getTypeIdentifier(),
             array_filter($this->types, fn (Type $t): bool => $t instanceof BuiltinType),
         );
 

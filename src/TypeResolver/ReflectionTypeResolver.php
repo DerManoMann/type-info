@@ -42,24 +42,24 @@ final class ReflectionTypeResolver implements TypeResolverInterface
         $identifier = $subject->getName();
         $nullable = $subject->allowsNull();
 
-        if (TypeIdentifier::ARRAY->value === $identifier) {
+        if (TypeIdentifier::ARRAY === $identifier) {
             $type = Type::array();
 
             return $nullable ? Type::nullable($type) : $type;
         }
 
-        if (TypeIdentifier::ITERABLE->value === $identifier) {
+        if (TypeIdentifier::ITERABLE === $identifier) {
             $type = Type::iterable();
 
             return $nullable ? Type::nullable($type) : $type;
         }
 
-        if (TypeIdentifier::NULL->value === $identifier || TypeIdentifier::MIXED->value === $identifier) {
+        if (TypeIdentifier::NULL === $identifier || TypeIdentifier::MIXED === $identifier) {
             return Type::builtin($identifier);
         }
 
         if ($subject->isBuiltin()) {
-            $type = Type::builtin(TypeIdentifier::from($identifier));
+            $type = Type::builtin($identifier);
 
             return $nullable ? Type::nullable($type) : $type;
         }

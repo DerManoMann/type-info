@@ -18,17 +18,17 @@ use Radebatz\TypeInfo\TypeIdentifier;
  * @author Mathias Arlaud <mathias.arlaud@gmail.com>
  * @author Baptiste Leduc <baptiste.leduc@gmail.com>
  *
- * @template T of TypeIdentifier
+ * @template T string
  */
 final class BuiltinType extends Type
 {
-    private TypeIdentifier $typeIdentifier;
+    private string $typeIdentifier;
 
     /**
      * @param T $typeIdentifier
      */
     public function __construct(
-        TypeIdentifier $typeIdentifier
+        string $typeIdentifier
     ) {
         $this->typeIdentifier = $typeIdentifier;
     }
@@ -36,25 +36,17 @@ final class BuiltinType extends Type
     /**
      * @return T
      */
-    public function getTypeIdentifier(): TypeIdentifier
+    public function getTypeIdentifier(): string
     {
         return $this->typeIdentifier;
     }
 
     /**
-     * @param TypeIdentifier|string $identifiers
+     * @param string $identifiers
      */
     public function isIdentifiedBy(...$identifiers): bool
     {
         foreach ($identifiers as $identifier) {
-            if (\is_string($identifier)) {
-                try {
-                    $identifier = TypeIdentifier::from($identifier);
-                } catch (\ValueError $error) {
-                    continue;
-                }
-            }
-
             if ($identifier === $this->typeIdentifier) {
                 return true;
             }
@@ -70,6 +62,6 @@ final class BuiltinType extends Type
 
     public function __toString(): string
     {
-        return $this->typeIdentifier->value;
+        return $this->typeIdentifier;
     }
 }

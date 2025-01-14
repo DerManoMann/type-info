@@ -17,6 +17,9 @@ use Radebatz\TypeInfo\Tests\Fixtures\DummyBackedEnum;
 use Radebatz\TypeInfo\Type;
 use Radebatz\TypeInfo\Type\BackedEnumType;
 
+/**
+ * @requires PHP 8.1
+ */
 class BackedEnumTypeTest extends TestCase
 {
     public function testCannotCreateInvalidBackingBuiltinType()

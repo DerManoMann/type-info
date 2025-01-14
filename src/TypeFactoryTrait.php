@@ -30,19 +30,8 @@ use Radebatz\TypeInfo\Type\UnionType;
  */
 trait TypeFactoryTrait
 {
-    /**
-     * @template T of TypeIdentifier
-     * @template U value-of<T>
-     *
-     * @param T|U $identifier
-     *
-     * @return BuiltinType<T>
-     */
-    public static function builtin($identifier): BuiltinType
+    public static function builtin(string $identifier): BuiltinType
     {
-        /** @var T $identifier */
-        $identifier = \is_string($identifier) ? TypeIdentifier::from($identifier) : $identifier;
-
         return new BuiltinType($identifier);
     }
 
@@ -216,7 +205,7 @@ trait TypeFactoryTrait
         if (is_subclass_of($className, \BackedEnum::class)) {
             if (null === $backingType) {
                 $reflectionBackingType = (new \ReflectionEnum($className))->getBackingType();
-                $typeIdentifier = TypeIdentifier::INT->value === (string) $reflectionBackingType ? TypeIdentifier::INT : TypeIdentifier::STRING;
+                $typeIdentifier = TypeIdentifier::INT === (string) $reflectionBackingType ? TypeIdentifier::INT : TypeIdentifier::STRING;
                 $backingType = new BuiltinType($typeIdentifier);
             }
 

@@ -17,44 +17,44 @@ namespace Radebatz\TypeInfo;
  * @author Mathias Arlaud <mathias.arlaud@gmail.com>
  * @author Baptiste Leduc <baptiste.leduc@gmail.com>
  */
-enum TypeIdentifier: string
+class TypeIdentifier
 {
-    case ARRAY = 'array';
-    case BOOL = 'bool';
-    case CALLABLE = 'callable';
-    case FALSE = 'false';
-    case FLOAT = 'float';
-    case INT = 'int';
-    case ITERABLE = 'iterable';
-    case MIXED = 'mixed';
-    case NULL = 'null';
-    case OBJECT = 'object';
-    case RESOURCE = 'resource';
-    case STRING = 'string';
-    case TRUE = 'true';
-    case NEVER = 'never';
-    case VOID = 'void';
+    public const ARRAY = 'array';
+    public const BOOL = 'bool';
+    public const CALLABLE = 'callable';
+    public const FALSE = 'false';
+    public const FLOAT = 'float';
+    public const INT = 'int';
+    public const ITERABLE = 'iterable';
+    public const MIXED = 'mixed';
+    public const NULL = 'null';
+    public const OBJECT = 'object';
+    public const RESOURCE = 'resource';
+    public const STRING = 'string';
+    public const TRUE = 'true';
+    public const NEVER = 'never';
+    public const VOID = 'void';
 
     /**
      * @return list<string>
      */
     public static function values(): array
     {
-        return array_column(self::cases(), 'value');
+        return (new \ReflectionClass(__CLASS__))->getConstants();
     }
 
-    public function isStandalone(): bool
+    public static function isStandalone(string $identifier): bool
     {
-        return \in_array($this, [self::MIXED, self::NEVER, self::VOID], true);
+        return \in_array($identifier, [self::MIXED, self::NEVER, self::VOID], true);
     }
 
-    public function isScalar(): bool
+    public static function isScalar(string $identifier): bool
     {
-        return \in_array($this, [self::STRING, self::FLOAT, self::INT, self::BOOL, self::FALSE, self::TRUE], true);
+        return \in_array($identifier, [self::STRING, self::FLOAT, self::INT, self::BOOL, self::FALSE, self::TRUE], true);
     }
 
-    public function isBool(): bool
+    public static function isBool(string $identifier): bool
     {
-        return \in_array($this, [self::BOOL, self::FALSE, self::TRUE], true);
+        return \in_array($identifier, [self::BOOL, self::FALSE, self::TRUE], true);
     }
 }

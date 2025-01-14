@@ -33,7 +33,7 @@ class ObjectType extends Type
         $this->className = $className;
     }
 
-    public function getTypeIdentifier(): TypeIdentifier
+    public function getTypeIdentifier(): string
     {
         return TypeIdentifier::OBJECT;
     }
@@ -52,15 +52,7 @@ class ObjectType extends Type
     public function isIdentifiedBy(...$identifiers): bool
     {
         foreach ($identifiers as $identifier) {
-            if ($identifier instanceof TypeIdentifier) {
-                if (TypeIdentifier::OBJECT === $identifier) {
-                    return true;
-                }
-
-                continue;
-            }
-
-            if (TypeIdentifier::OBJECT->value === $identifier) {
+            if (TypeIdentifier::OBJECT === $identifier) {
                 return true;
             }
 
