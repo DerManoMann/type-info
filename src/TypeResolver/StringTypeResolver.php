@@ -116,56 +116,92 @@ final class StringTypeResolver implements TypeResolverInterface
         }
 
         if ($node instanceof ConstTypeNode) {
-            return match (get_class($node->constExpr)) {
-                ConstExprArrayNode::class => Type::array(),
-                ConstExprFalseNode::class => Type::false(),
-                ConstExprFloatNode::class => Type::float(),
-                ConstExprIntegerNode::class => Type::int(),
-                ConstExprNullNode::class => Type::null(),
-                ConstExprStringNode::class => Type::string(),
-                ConstExprTrueNode::class => Type::true(),
-                default => throw new \DomainException(sprintf('Unhandled "%s" constant expression.', get_class($node->constExpr))),
-            };
+            switch (get_class($node->constExpr)) {
+                case ConstExprArrayNode::class: return Type::array();
+                case ConstExprFalseNode::class: return Type::false();
+                case ConstExprFloatNode::class: return Type::float();
+                case ConstExprIntegerNode::class: return Type::int();
+                case ConstExprNullNode::class: return Type::null();
+                case ConstExprStringNode::class: return Type::string();
+                case ConstExprTrueNode::class: return Type::true();
+                default: throw new \DomainException(sprintf('Unhandled "%s" constant expression.', get_class($node->constExpr)));
+            }
         }
 
         if ($node instanceof IdentifierTypeNode) {
-            $type = match ($node->name) {
-                'bool', 'boolean' => Type::bool(),
-                'true' => Type::true(),
-                'false' => Type::false(),
-                'int', 'integer', 'positive-int', 'negative-int', 'non-positive-int', 'non-negative-int', 'non-zero-int' => Type::int(),
-                'float', 'double' => Type::float(),
-                'string',
-                'class-string',
-                'trait-string',
-                'interface-string',
-                'callable-string',
-                'numeric-string',
-                'lowercase-string',
-                'non-empty-lowercase-string',
-                'non-empty-string',
-                'non-falsy-string',
-                'truthy-string',
-                'literal-string',
-                'html-escaped-string' => Type::string(),
-                'resource' => Type::resource(),
-                'object' => Type::object(),
-                'callable' => Type::callable(),
-                'array', 'non-empty-array' => Type::array(),
-                'list', 'non-empty-list' => Type::list(),
-                'iterable' => Type::iterable(),
-                'mixed' => Type::mixed(),
-                'null' => Type::null(),
-                'array-key' => Type::union(Type::int(), Type::string()),
-                'scalar' => Type::union(Type::int(), Type::float(), Type::string(), Type::bool()),
-                'number' => Type::union(Type::int(), Type::float()),
-                'numeric' => Type::union(Type::int(), Type::float(), Type::string()),
-                'self' => $typeContext ? Type::object($typeContext->getDeclaringClass()) : throw new InvalidArgumentException(sprintf('A "%s" must be provided to resolve "self".', TypeContext::class)),
-                'static' => $typeContext ? Type::object($typeContext->getCalledClass()) : throw new InvalidArgumentException(sprintf('A "%s" must be provided to resolve "static".', TypeContext::class)),
-                'parent' => $typeContext ? Type::object($typeContext->getParentClass()) : throw new InvalidArgumentException(sprintf('A "%s" must be provided to resolve "parent".', TypeContext::class)),
-                'void' => Type::void(),
-                'never', 'never-return', 'never-returns', 'no-return' => Type::never(),
-                default => $this->resolveCustomIdentifier($node->name, $typeContext),
+            switch ($node->name) {
+                case 'bool': case 'boolean': $type = Type::bool();
+                    break;
+                case 'true': $type = Type::true();
+                    break;
+                case 'false': $type = Type::false();
+                    break;
+                case 'int': case 'integer': case 'positive-int': case 'negative-int': case 'non-positive-int': case 'non-negative-int': case 'non-zero-int': $type = Type::int();
+                    break;
+                case 'float': case 'double': $type = Type::float();
+                    break;
+                case 'string':
+                case 'class-string':
+                case 'trait-string':
+                case 'interface-string':
+                case 'callable-string':
+                case 'numeric-string':
+                case 'lowercase-string':
+                case 'non-empty-lowercase-string':
+                case 'non-empty-string':
+                case 'non-falsy-string':
+                case 'truthy-string':
+                case 'literal-string':
+                case 'html-escaped-string': $type = Type::string();
+                    break;
+                case 'resource': $type = Type::resource();
+                    break;
+                case 'object': $type = Type::object();
+                    break;
+                case 'callable': $type = Type::callable();
+                    break;
+                case 'array': case 'non-empty-array': $type = Type::array();
+                    break;
+                case 'list': case 'non-empty-list': $type = Type::list();
+                    break;
+                case 'iterable': $type = Type::iterable();
+                    break;
+                case 'mixed': $type = Type::mixed();
+                    break;
+                case 'null': $type = Type::null();
+                    break;
+                case 'array-key': $type = Type::union(Type::int(), Type::string());
+                    break;
+                case 'scalar': $type = Type::union(Type::int(), Type::float(), Type::string(), Type::bool());
+                    break;
+                case 'number': $type = Type::union(Type::int(), Type::float());
+                    break;
+                case 'numeric': $type = Type::union(Type::int(), Type::float(), Type::string());
+                    break;
+                case 'self':
+                    if (!$typeContext) {
+                        throw new InvalidArgumentException(sprintf('A "%s" must be provided to resolve "self".', TypeContext::class));
+                    }
+                    $type =Type::object($typeContext->getDeclaringClass());
+                    break;
+                case 'static':
+                    if (!$typeContext) {
+                        throw new InvalidArgumentException(sprintf('A "%s" must be provided to resolve "static".', TypeContext::class));
+                    }
+                    $type = Type::object($typeContext->getCalledClass());
+                    break;
+                case 'parent':
+                    if (!$typeContext) {
+                        throw new InvalidArgumentException(sprintf('A "%s" must be provided to resolve "parent".', TypeContext::class));
+                    }
+                    $type = Type::object($typeContext->getParentClass());
+                    break;
+                case 'void': $type = Type::void();
+                    break;
+                case 'never': case 'never-return': case 'never-returns': case 'no-return': $type = Type::never();
+                    break;
+                default: $type = $this->resolveCustomIdentifier($node->name, $typeContext);
+                    break;
             };
 
             if ($typeIsCollectionObject($type)) {
@@ -206,10 +242,10 @@ final class StringTypeResolver implements TypeResolverInterface
             }
 
             if ($typeIsCollectionObject($type)) {
-                return match (count($variableTypes)) {
-                    1 => Type::collection($type, $variableTypes[0]),
-                    2 => Type::collection($type, $variableTypes[1], $variableTypes[0]),
-                    default => Type::collection($type),
+                switch (count($variableTypes)) {
+                    case 1: return Type::collection($type, $variableTypes[0]);
+                    case 2: return Type::collection($type, $variableTypes[1], $variableTypes[0]);
+                    default: return Type::collection($type);
                 };
             }
 
