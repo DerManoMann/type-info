@@ -1,7 +1,11 @@
 TypeInfo Component
 ==================
 
-**This is a fork of the [Symfony TypeInfo](https://symfony.com/doc/current/components/type_info.html) component.** 
+**
+This is a fork of the [Symfony TypeInfo](https://symfony.com/doc/current/components/type_info.html) component backporting to 7.4.
+
+It also adds adds support for extended type information of `builtin` types (e.g. `positive-int`, `class-string`, etc.)
+** 
 
 The TypeInfo component extracts PHP types information.
 
