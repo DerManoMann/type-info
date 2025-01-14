@@ -22,6 +22,9 @@ use Radebatz\TypeInfo\Exception\RuntimeException;
 use Radebatz\TypeInfo\Exception\UnsupportedException;
 use Radebatz\TypeInfo\Type;
 use Radebatz\TypeInfo\TypeResolver\StringTypeResolver;
+use function count;
+use function is_string;
+use function sprintf;
 
 /**
  * Creates a type resolving context.
@@ -73,14 +76,26 @@ final class TypeContextFactory
 
     public function createFromReflection(\Reflector $reflection): ?TypeContext
     {
-        $declaringClassReflection = match (true) {
-            $reflection instanceof \ReflectionClass => $reflection,
-            $reflection instanceof \ReflectionMethod => $reflection->getDeclaringClass(),
-            $reflection instanceof \ReflectionProperty => $reflection->getDeclaringClass(),
-            $reflection instanceof \ReflectionParameter => $reflection->getDeclaringClass(),
-            $reflection instanceof \ReflectionFunctionAbstract => $reflection->getClosureScopeClass(),
-            default => null,
-        };
+        switch (true) {
+            case $reflection instanceof \ReflectionClass:
+                $declaringClassReflection = $reflection;
+                break;
+            case $reflection instanceof \ReflectionMethod:
+                $declaringClassReflection = $reflection->getDeclaringClass();
+                break;
+            case $reflection instanceof \ReflectionProperty:
+                $declaringClassReflection = $reflection->getDeclaringClass();
+                break;
+            case $reflection instanceof \ReflectionParameter:
+                $declaringClassReflection = $reflection->getDeclaringClass();
+                break;
+            case $reflection instanceof \ReflectionFunctionAbstract:
+                $declaringClassReflection = $reflection->getClosureScopeClass();
+                break;
+            default:
+                $declaringClassReflection = null;
+                break;
+        }
 
         if (null === $declaringClassReflection) {
             return null;
@@ -93,11 +108,17 @@ final class TypeContextFactory
             $this->collectUses($declaringClassReflection),
         );
 
-        $templates = match (true) {
-            $reflection instanceof \ReflectionFunctionAbstract => $this->collectTemplates($reflection, $typeContext) + $this->collectTemplates($declaringClassReflection, $typeContext),
-            $reflection instanceof \ReflectionParameter => $this->collectTemplates($reflection->getDeclaringFunction(), $typeContext) + $this->collectTemplates($declaringClassReflection, $typeContext),
-            default => $this->collectTemplates($declaringClassReflection, $typeContext),
-        };
+        switch (true) {
+            case $reflection instanceof \ReflectionFunctionAbstract:
+                $templates = $this->collectTemplates($reflection, $typeContext) + $this->collectTemplates($declaringClassReflection, $typeContext);
+                break;
+            case $reflection instanceof \ReflectionParameter:
+                $templates = $this->collectTemplates($reflection->getDeclaringFunction(), $typeContext) + $this->collectTemplates($declaringClassReflection, $typeContext);
+                break;
+            default:
+                $templates = $this->collectTemplates($declaringClassReflection, $typeContext);
+                break;
+        }
 
         return new TypeContext(
             $typeContext->calledClassName,
@@ -114,12 +135,12 @@ final class TypeContextFactory
     private function collectUses(\ReflectionClass $reflection): array
     {
         $fileName = $reflection->getFileName();
-        if (!\is_string($fileName) || !is_file($fileName)) {
+        if (!is_string($fileName) || !is_file($fileName)) {
             return [];
         }
 
         if (false === $lines = @file($fileName)) {
-            throw new RuntimeException(\sprintf('Unable to read file "%s".', $fileName));
+            throw new RuntimeException(sprintf('Unable to read file "%s".', $fileName));
         }
 
         $uses = [];
@@ -130,7 +151,7 @@ final class TypeContextFactory
                 $inUseSection = true;
                 $use = explode(' as ', substr($line, 4, -2), 2);
 
-                $alias = 1 === \count($use) ? substr($use[0], false !== ($p = strrpos($use[0], '\\')) ? 1 + $p : 0) : $use[1];
+                $alias = 1 === count($use) ? substr($use[0], false !== ($p = strrpos($use[0], '\\')) ? 1 + $p : 0) : $use[1];
                 $uses[$alias] = $use[0];
             } elseif ($inUseSection) {
                 break;
