@@ -1,2 +1,217 @@
 parameters:
-	ignoreErrors: []
+	ignoreErrors:
+		-
+			message: '#^Method Radebatz\\TypeInfo\\Type\:\:array\(\) should return Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\BuiltinType\<''array''\>\> but returns Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\BuiltinType\<''array''\>\|Radebatz\\TypeInfo\\Type\\BuiltinType\<''iterable''\>\|Radebatz\\TypeInfo\\Type\\GenericType\|Radebatz\\TypeInfo\\Type\\ObjectType\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^Method Radebatz\\TypeInfo\\Type\:\:collection\(\) should return Radebatz\\TypeInfo\\Type\\CollectionType\<T of Radebatz\\TypeInfo\\Type\\BuiltinType\<''array''\>\|Radebatz\\TypeInfo\\Type\\BuiltinType\<''iterable''\>\|Radebatz\\TypeInfo\\Type\\GenericType\|Radebatz\\TypeInfo\\Type\\ObjectType\> but returns Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\GenericType\<T of Radebatz\\TypeInfo\\Type\\BuiltinType\<''array''\>\|Radebatz\\TypeInfo\\Type\\BuiltinType\<''iterable''\>\|Radebatz\\TypeInfo\\Type\\ObjectType\>\|\(T of Radebatz\\TypeInfo\\Type\\BuiltinType\<''array''\>\|Radebatz\\TypeInfo\\Type\\BuiltinType\<''iterable''\>\|Radebatz\\TypeInfo\\Type\\GenericType\|Radebatz\\TypeInfo\\Type\\ObjectType\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^Method Radebatz\\TypeInfo\\Type\:\:intersection\(\) should return Radebatz\\TypeInfo\\Type\\IntersectionType\<T of Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\>\|Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\|Radebatz\\TypeInfo\\Type\\ObjectType\> but returns Radebatz\\TypeInfo\\Type\\IntersectionType\<Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\>\|Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\|Radebatz\\TypeInfo\\Type\\ObjectType\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^Method Radebatz\\TypeInfo\\Type\:\:iterable\(\) should return Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\BuiltinType\<''iterable''\>\> but returns Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\BuiltinType\<''array''\>\|Radebatz\\TypeInfo\\Type\\BuiltinType\<''iterable''\>\|Radebatz\\TypeInfo\\Type\\GenericType\|Radebatz\\TypeInfo\\Type\\ObjectType\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^Method Radebatz\\TypeInfo\\Type\:\:template\(\) should return Radebatz\\TypeInfo\\Type\\TemplateType\<Radebatz\\TypeInfo\\Type\\BuiltinType\<''mixed''\>\>\|Radebatz\\TypeInfo\\Type\\TemplateType\<T of Radebatz\\TypeInfo\\Type\> but returns Radebatz\\TypeInfo\\Type\\TemplateType\<Radebatz\\TypeInfo\\Type\\BuiltinType\<''mixed''\>\|T of Radebatz\\TypeInfo\\Type\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$className with type T is not subtype of native type string\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$className with type T\|null is not subtype of native type string\|null\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$types with type list\<Radebatz\\TypeInfo\\Type\\IntersectionType\<T of Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\>\|Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\|Radebatz\\TypeInfo\\Type\\ObjectType\>\|\(T of Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\>\|Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\|Radebatz\\TypeInfo\\Type\\ObjectType\)\> is incompatible with native type Radebatz\\TypeInfo\\Type\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$types with type list\<T of Radebatz\\TypeInfo\\Type\> is incompatible with native type Radebatz\\TypeInfo\\Type\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^PHPDoc tag @return has invalid value \(\(\$className is class\-string\<\\BackedEnum\> \? \(\$backingType is U \? BackedEnumType\<T,U\> \: BackedEnumType\<T,BuiltinType\<TypeIdentifier\:\:INT\>\|BuiltinType\<TypeIdentifier\:\:STRING\>\>\) \: EnumType\<T\>\)\)\)\: Unexpected token "\)", expected TOKEN_HORIZONTAL_WS at offset 450 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^PHPDoc tag @template T for method Radebatz\\TypeInfo\\Type\:\:enum\(\) with bound type class\-string\<UnitEnum\> is not supported\.$#'
+			identifier: generics.notSupportedBound
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^PHPDoc tag @template T for method Radebatz\\TypeInfo\\Type\:\:object\(\) with bound type class\-string is not supported\.$#'
+			identifier: generics.notSupportedBound
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^Template type T of method Radebatz\\TypeInfo\\Type\:\:enum\(\) is not referenced in a parameter\.$#'
+			identifier: method.templateTypeNotInParameter
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^Template type T of method Radebatz\\TypeInfo\\Type\:\:intersection\(\) is not referenced in a parameter\.$#'
+			identifier: method.templateTypeNotInParameter
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^Template type T of method Radebatz\\TypeInfo\\Type\:\:union\(\) is not referenced in a parameter\.$#'
+			identifier: method.templateTypeNotInParameter
+			count: 1
+			path: src/Type.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$className with type T is not subtype of native type string\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Type/BackedEnumType.php
+
+		-
+			message: '#^PHPDoc tag @template T for class Radebatz\\TypeInfo\\Type\\BackedEnumType with bound type class\-string\<BackedEnum\> is not supported\.$#'
+			identifier: generics.notSupportedBound
+			count: 1
+			path: src/Type/BackedEnumType.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$typeIdentifier with type T is not subtype of native type string\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Type/BuiltinType.php
+
+		-
+			message: '#^PHPDoc tag @return with type T is not subtype of native type string\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Type/BuiltinType.php
+
+		-
+			message: '#^PHPDoc tag @template T for class Radebatz\\TypeInfo\\Type\\EnumType with bound type class\-string\<UnitEnum\> is not supported\.$#'
+			identifier: generics.notSupportedBound
+			count: 1
+			path: src/Type/EnumType.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$types with type list\<T of Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\>\|Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\|Radebatz\\TypeInfo\\Type\\ObjectType\> is incompatible with native type Radebatz\\TypeInfo\\Type\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Type/IntersectionType.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$className with type T is not subtype of native type string\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Type/ObjectType.php
+
+		-
+			message: '#^PHPDoc tag @return with type T is not subtype of native type string\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Type/ObjectType.php
+
+		-
+			message: '#^PHPDoc tag @template T for class Radebatz\\TypeInfo\\Type\\ObjectType with bound type class\-string is not supported\.$#'
+			identifier: generics.notSupportedBound
+			count: 1
+			path: src/Type/ObjectType.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$types with type list\<T of Radebatz\\TypeInfo\\Type\> is incompatible with native type Radebatz\\TypeInfo\\Type\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Type/UnionType.php
+
+		-
+			message: '#^Dead catch \- Throwable is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
+			count: 1
+			path: src/TypeContext/TypeContext.php
+
+		-
+			message: '#^Method Radebatz\\TypeInfo\\TypeIdentifier\:\:values\(\) should return list\<string\> but returns array\<string, mixed\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/TypeIdentifier.php
+
+		-
+			message: '#^Instanceof between ReflectionFunctionAbstract and ReflectionFunctionAbstract will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 2
+			path: src/TypeResolver/PhpDocAwareReflectionTypeResolver.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: src/TypeResolver/PhpDocAwareReflectionTypeResolver.php
+
+		-
+			message: '#^Variable \$docComment might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: src/TypeResolver/PhpDocAwareReflectionTypeResolver.php
+
+		-
+			message: '#^Variable \$tagName might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: src/TypeResolver/PhpDocAwareReflectionTypeResolver.php
+
+		-
+			message: '#^Variable \$subjectType might not be defined\.$#'
+			identifier: variable.undefined
+			count: 3
+			path: src/TypeResolver/TypeResolver.php
+
+		-
+			message: '#^Parameter \#2 \$backingType of class Radebatz\\TypeInfo\\Type\\BackedEnumType constructor expects U of Radebatz\\TypeInfo\\Type\\BuiltinType\<''int''\>\|Radebatz\\TypeInfo\\Type\\BuiltinType\<''string''\>, Radebatz\\TypeInfo\\Type\\BuiltinType\<''bool''\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Type/BackedEnumTypeTest.php
+
+		-
+			message: '#^Parameter \#1 \$type of class Radebatz\\TypeInfo\\Type\\CollectionType constructor expects T of Radebatz\\TypeInfo\\Type\\BuiltinType\<''array''\>\|Radebatz\\TypeInfo\\Type\\BuiltinType\<''iterable''\>\|Radebatz\\TypeInfo\\Type\\GenericType\|Radebatz\\TypeInfo\\Type\\ObjectType, Radebatz\\TypeInfo\\Type\\BuiltinType\<''int''\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Type/CollectionTypeTest.php
+
+		-
+			message: '#^Parameter \#1 \$type of class Radebatz\\TypeInfo\\Type\\GenericType constructor expects T of Radebatz\\TypeInfo\\Type\\BuiltinType\<''array''\>\|Radebatz\\TypeInfo\\Type\\BuiltinType\<''iterable''\>\|Radebatz\\TypeInfo\\Type\\ObjectType, Radebatz\\TypeInfo\\Type\\BuiltinType\<''int''\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Type/GenericTypeTest.php
+
+		-
+			message: '#^Parameter \#1 \$specification of method Radebatz\\TypeInfo\\Type\\IntersectionType\<Radebatz\\TypeInfo\\Type\\CollectionType\<Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\>\|Radebatz\\TypeInfo\\Type\\GenericType\<Radebatz\\TypeInfo\\Type\\ObjectType\>\|Radebatz\\TypeInfo\\Type\\ObjectType\>\:\:composedTypesAreSatisfiedBy\(\) expects callable\(Radebatz\\TypeInfo\\Type\)\: bool, Closure\(Radebatz\\TypeInfo\\Type\\ObjectType\)\: bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Type/IntersectionTypeTest.php
