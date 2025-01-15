@@ -74,7 +74,7 @@ class TypeFactoryTest extends TestCase
                 new BuiltinType(TypeIdentifier::ARRAY),
                 new BuiltinType(TypeIdentifier::INT),
                 new BuiltinType(TypeIdentifier::BOOL),
-            ), isList: true),
+            ), true),
             Type::array(Type::bool(), Type::int(), true),
         );
 
@@ -83,7 +83,7 @@ class TypeFactoryTest extends TestCase
                 new BuiltinType(TypeIdentifier::ARRAY),
                 new BuiltinType(TypeIdentifier::INT),
                 new BuiltinType(TypeIdentifier::MIXED),
-            ), isList: true),
+            ), true),
             Type::list(),
         );
 
@@ -92,7 +92,7 @@ class TypeFactoryTest extends TestCase
                 new BuiltinType(TypeIdentifier::ARRAY),
                 new BuiltinType(TypeIdentifier::INT),
                 new BuiltinType(TypeIdentifier::BOOL),
-            ), isList: true),
+            ), true),
             Type::list(Type::bool()),
         );
 
@@ -142,7 +142,7 @@ class TypeFactoryTest extends TestCase
                 new BuiltinType(TypeIdentifier::ITERABLE),
                 new BuiltinType(TypeIdentifier::INT),
                 new BuiltinType(TypeIdentifier::BOOL),
-            ), isList: true),
+            ), true),
             Type::iterable(Type::bool(), Type::int(), true),
         );
     }
