@@ -82,6 +82,9 @@ class TypeContextFactoryTest extends TestCase
         $this->assertEquals($uses, $this->typeContextFactory->createFromReflection(new \ReflectionParameter([DummyWithUses::class, 'setCreatedAt'], 'createdAt'))->uses);
     }
 
+    /**
+     * @requires PHP 8.0
+     */
     public function testCollectTemplates()
     {
         $this->assertEquals([], $this->typeContextFactory->createFromClassName(Dummy::class)->templates);
@@ -113,6 +116,9 @@ class TypeContextFactoryTest extends TestCase
         ], $this->typeContextFactory->createFromReflection(new \ReflectionParameter([DummyWithTemplates::class, 'getPrice'], 'inCents'))->templates);
     }
 
+    /**
+     * @requires PHP 8.0
+     */
     public function testDoNotCollectTemplatesWhenToStringTypeResolver()
     {
         $typeContextFactory = new TypeContextFactory();

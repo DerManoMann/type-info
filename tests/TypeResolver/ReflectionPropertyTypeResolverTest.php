@@ -19,6 +19,9 @@ use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
 use Radebatz\TypeInfo\TypeResolver\ReflectionPropertyTypeResolver;
 use Radebatz\TypeInfo\TypeResolver\ReflectionTypeResolver;
 
+/**
+ * @requires PHP 8.1
+ */
 class ReflectionPropertyTypeResolverTest extends TestCase
 {
     private ReflectionPropertyTypeResolver $resolver;

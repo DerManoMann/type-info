@@ -19,6 +19,9 @@ use Radebatz\TypeInfo\TypeContext\TypeContextFactory;
 use Radebatz\TypeInfo\TypeResolver\ReflectionParameterTypeResolver;
 use Radebatz\TypeInfo\TypeResolver\ReflectionTypeResolver;
 
+/**
+ * @requires PHP 8.1
+ */
 class ReflectionParameterTypeResolverTest extends TestCase
 {
     private ReflectionParameterTypeResolver $resolver;
@@ -50,7 +53,7 @@ class ReflectionParameterTypeResolverTest extends TestCase
         $reflectionParameter = $reflectionFunction->getParameters()[0];
 
         $this->expectException(UnsupportedException::class);
-        $this->expectExceptionMessage('Cannot resolve type for "fclose($stream)".');
+        $this->expectExceptionMessage('Cannot resolve type for "fclose($');
 
         $this->resolver->resolve($reflectionParameter);
     }

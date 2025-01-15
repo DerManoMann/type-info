@@ -22,6 +22,9 @@ use Radebatz\TypeInfo\TypeResolver\TypeResolver;
 
 class PhpDocAwareReflectionTypeResolverTest extends TestCase
 {
+    /**
+     * @requires PHP 8.0
+     */
     public function testReadPhpDoc()
     {
         $resolver = new PhpDocAwareReflectionTypeResolver(TypeResolver::create(), new StringTypeResolver(), new TypeContextFactory());

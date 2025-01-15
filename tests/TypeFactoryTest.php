@@ -153,6 +153,9 @@ class TypeFactoryTest extends TestCase
         $this->assertEquals(new ObjectType(self::class), Type::object(self::class));
     }
 
+    /**
+     * @requires PHP 8.0
+     */
     public function testCreateEnum()
     {
         $this->assertEquals(new EnumType(DummyEnum::class), Type::enum(DummyEnum::class));

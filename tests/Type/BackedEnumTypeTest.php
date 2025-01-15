@@ -18,7 +18,7 @@ use Radebatz\TypeInfo\Type;
 use Radebatz\TypeInfo\Type\BackedEnumType;
 
 /**
- * @requires PHP 8.1
+ * @requires PHP 8.0
  */
 class BackedEnumTypeTest extends TestCase
 {
