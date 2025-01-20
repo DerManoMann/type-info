@@ -35,12 +35,14 @@ use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
 use PHPStan\PhpDocParser\ParserConfig;
+use Radebatz\TypeInfo\SubTypeIdentifier;
 use Radebatz\TypeInfo\Exception\InvalidArgumentException;
 use Radebatz\TypeInfo\Exception\UnsupportedException;
 use Radebatz\TypeInfo\Type;
 use Radebatz\TypeInfo\Type\BuiltinType;
 use Radebatz\TypeInfo\Type\CollectionType;
 use Radebatz\TypeInfo\Type\GenericType;
+use Radebatz\TypeInfo\Type\SubType;
 use Radebatz\TypeInfo\TypeContext\TypeContext;
 use Radebatz\TypeInfo\TypeIdentifier;
 use function count;
@@ -136,23 +138,32 @@ final class StringTypeResolver implements TypeResolverInterface
                     break;
                 case 'false': $type = Type::false();
                     break;
-                case 'int': case 'integer': case 'positive-int': case 'negative-int': case 'non-positive-int': case 'non-negative-int': case 'non-zero-int': $type = Type::int();
+                case 'int': case 'integer': $type = Type::int();
+                    break;
+                case SubTypeIdentifier::POSITIVE_INT:
+                case SubTypeIdentifier::NEGATIVE_INT:
+                case SubTypeIdentifier::NON_POSITIVE_INT:
+                case SubTypeIdentifier::NON_NEGATIVE_INT:
+                case SubTypeIdentifier::NON_ZERO_INT:
+                    $type = Type::int(new SubType($node->name));
                     break;
                 case 'float': case 'double': $type = Type::float();
                     break;
-                case 'string':
-                case 'class-string':
-                case 'trait-string':
-                case 'interface-string':
-                case 'callable-string':
-                case 'numeric-string':
-                case 'lowercase-string':
-                case 'non-empty-lowercase-string':
-                case 'non-empty-string':
-                case 'non-falsy-string':
-                case 'truthy-string':
-                case 'literal-string':
-                case 'html-escaped-string': $type = Type::string();
+                case 'string':  $type = Type::string();
+                    break;
+                case SubTypeIdentifier::CLASS_STRING:
+                case SubTypeIdentifier::TRAIT_STRING:
+                case SubTypeIdentifier::INTERFACE_STRING:
+                case SubTypeIdentifier::CALLABLE_STRING:
+                case SubTypeIdentifier::NUMERIC_STRING:
+                case SubTypeIdentifier::LOWERCASE_STRING:
+                case SubTypeIdentifier::NON_EMPTY_LOWERCASE_STRING:
+                case SubTypeIdentifier::NON_EMPTY_STRING:
+                case SubTypeIdentifier::NON_FALSY_STRING:
+                case SubTypeIdentifier::TRUTHY_STRING:
+                case SubTypeIdentifier::LITERAL_STRING:
+                case SubTypeIdentifier::HTML_ESCAPED_STRING:
+                    $type = Type::string(new SubType($node->name));
                     break;
                 case 'resource': $type = Type::resource();
                     break;
@@ -160,7 +171,9 @@ final class StringTypeResolver implements TypeResolverInterface
                     break;
                 case 'callable': $type = Type::callable();
                     break;
-                case 'array': case 'non-empty-array': $type = Type::array();
+                case 'array': $type = Type::array();
+                    break;
+                case 'non-empty-array': $type = Type::array();
                     break;
                 case 'list': case 'non-empty-list': $type = Type::list();
                     break;
@@ -198,7 +211,12 @@ final class StringTypeResolver implements TypeResolverInterface
                     break;
                 case 'void': $type = Type::void();
                     break;
-                case 'never': case 'never-return': case 'never-returns': case 'no-return': $type = Type::never();
+                case 'never': $type = Type::never();
+                    break;
+                case SubTypeIdentifier::NEVER_RETURN:
+                case SubTypeIdentifier::NEVER_RETURNS:
+                case SubTypeIdentifier::NO_RETURN:
+                    $type = Type::never(new SubType($node->name));
                     break;
                 default: $type = $this->resolveCustomIdentifier($node->name, $typeContext);
                     break;

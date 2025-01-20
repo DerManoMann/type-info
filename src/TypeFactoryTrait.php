@@ -19,6 +19,7 @@ use Radebatz\TypeInfo\Type\GenericType;
 use Radebatz\TypeInfo\Type\IntersectionType;
 use Radebatz\TypeInfo\Type\NullableType;
 use Radebatz\TypeInfo\Type\ObjectType;
+use Radebatz\TypeInfo\Type\SubType;
 use Radebatz\TypeInfo\Type\TemplateType;
 use Radebatz\TypeInfo\Type\UnionType;
 
@@ -30,17 +31,17 @@ use Radebatz\TypeInfo\Type\UnionType;
  */
 trait TypeFactoryTrait
 {
-    public static function builtin(string $identifier): BuiltinType
+    public static function builtin(string $identifier, ?SubType $subtype = null): BuiltinType
     {
-        return new BuiltinType($identifier);
+        return new BuiltinType($identifier, $subtype);
     }
 
     /**
      * @return BuiltinType<TypeIdentifier::INT>
      */
-    public static function int(): BuiltinType
+    public static function int(?SubType $subtype = null): BuiltinType
     {
-        return self::builtin(TypeIdentifier::INT);
+        return self::builtin(TypeIdentifier::INT, $subtype);
     }
 
     /**
@@ -54,9 +55,9 @@ trait TypeFactoryTrait
     /**
      * @return BuiltinType<TypeIdentifier::STRING>
      */
-    public static function string(): BuiltinType
+    public static function string(?SubType $subtype = null): BuiltinType
     {
-        return self::builtin(TypeIdentifier::STRING);
+        return self::builtin(TypeIdentifier::STRING, $subtype);
     }
 
     /**
@@ -126,9 +127,9 @@ trait TypeFactoryTrait
     /**
      * @return BuiltinType<TypeIdentifier::NEVER>
      */
-    public static function never(): BuiltinType
+    public static function never(?SubType $subtype = null): BuiltinType
     {
-        return self::builtin(TypeIdentifier::NEVER);
+        return self::builtin(TypeIdentifier::NEVER, $subtype);
     }
 
     /**

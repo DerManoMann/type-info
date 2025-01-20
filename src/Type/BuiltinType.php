@@ -23,14 +23,17 @@ use Radebatz\TypeInfo\TypeIdentifier;
 final class BuiltinType extends Type
 {
     private string $typeIdentifier;
+    private ?SubType $subtype;
 
     /**
      * @param T $typeIdentifier
      */
     public function __construct(
-        string $typeIdentifier
+        string $typeIdentifier,
+        ?SubType $subtype = null
     ) {
         $this->typeIdentifier = $typeIdentifier;
+        $this->subtype = $subtype;
     }
 
     /**
