@@ -158,7 +158,7 @@ class StringTypeResolverTest extends TestCase
         // generic
         yield [Type::generic(Type::object(\DateTime::class), Type::string(), Type::bool()), \DateTime::class . '<string, bool>'];
         yield [Type::generic(Type::object(\DateTime::class), Type::generic(Type::object(\Stringable::class), Type::bool())), \sprintf('%s<%s<bool>>', \DateTime::class, \Stringable::class)];
-        yield [Type::int(), 'int<0, 100>'];
+        yield [Type::int(new Type\IntRangeSubType([0, 100])), 'int<0, 100>'];
 
         // union
         yield [Type::union(Type::int(), Type::string()), 'int|string'];

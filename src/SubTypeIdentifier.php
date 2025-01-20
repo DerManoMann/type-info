@@ -23,6 +23,7 @@ class SubTypeIdentifier
     public const NON_POSITIVE_INT = 'non-positive-int';
     public const NON_NEGATIVE_INT = 'non-negative-int';
     public const NON_ZERO_INT = 'non-zero-int';
+    public const RANGE_INT = 'range-int';
     public const CLASS_STRING = 'class-string';
     public const TRAIT_STRING = 'trait-string';
     public const INTERFACE_STRING = 'interface-string';

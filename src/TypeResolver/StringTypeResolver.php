@@ -236,9 +236,18 @@ final class StringTypeResolver implements TypeResolverInterface
         if ($node instanceof GenericTypeNode) {
             $type = $this->getTypeFromNode($node->type, $typeContext);
 
-            // handle integer ranges as simple integers
+            // handle integer ranges
             if ($type->isIdentifiedBy(TypeIdentifier::INT)) {
-                return $type;
+                $getConstValueFromNode = function (TypeNode $node, ?TypeContext $typeContext) {
+                    switch (get_class($node->constExpr)) {
+                        case ConstExprIntegerNode::class: return (int) $node->constExpr->value;
+                        default: throw new \DomainException(sprintf('Unhandled "%s" constant expression.', get_class($node->constExpr)));
+                    }
+                };
+
+                $variableValues = array_map(fn (TypeNode $t): int => $getConstValueFromNode($t, $typeContext), $node->genericTypes);
+
+                return Type::int(new Type\IntRangeSubType($variableValues));
             }
 
             $variableTypes = array_map(fn (TypeNode $t): Type => $this->getTypeFromNode($t, $typeContext), $node->genericTypes);
