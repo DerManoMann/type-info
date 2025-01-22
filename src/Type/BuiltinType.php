@@ -44,6 +44,11 @@ final class BuiltinType extends Type
         return $this->typeIdentifier;
     }
 
+    public function getSubtype(): ?SubType
+    {
+        return $this->subtype;
+    }
+
     /**
      * @param string $identifiers
      */

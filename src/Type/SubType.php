@@ -4,10 +4,15 @@ namespace Radebatz\TypeInfo\Type;
 
 class SubType
 {
-    protected $subtype;
+    protected $subTypeIdentifier;
 
-    public function __construct(string $subtype)
+    public function __construct(string $subTypeIdentifier)
     {
-        $this->subtype = $subtype;
+        $this->subTypeIdentifier = $subTypeIdentifier;
+    }
+
+    public function getSubTypeIdentifier(): string
+    {
+        return $this->subTypeIdentifier;
     }
 }
